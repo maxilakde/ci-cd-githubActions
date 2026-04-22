@@ -1,0 +1,51 @@
+name: Deploy to EC2
+
+on: 
+  push: 
+    branches: [ "main" ]
+
+jobs:
+  deploy: 
+    runs-on: ubuntu-latest    
+
+    steps:
+      - name: Obtener codigo
+        uses: actions/checkout@v4
+
+      - name: Configurar node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.15.1
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Ejecutar pruebas
+        run: npm test
+
+      - name: Configurar SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+      - name: Agregar al host conocido
+        run: |
+          ssh-keyscan -H ec2-3-90-210-163.compute-1.amazonaws.com >> ~/.ssh/known_hosts
+
+      - name: Copiar archivos al EC2 con rsync
+        run: |
+          rsync -avz -e "ssh -o StrictHostKeyChecking=no" \
+            --exclude='.git' \
+            --exclude='node_modules' \
+            ./ ubuntu@ec2-3-90-210-163.compute-1.amazonaws.com:/var/www/api_devops
+
+      - name: Instalar las librerias en el servidor
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@ec2-3-90-210-163.compute-1.amazonaws.com \
+            "cd /var/www/api_devops && npm install"
+
+      - name: Reiniciar PM2 correctamente
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@ec2-52-73-246-114.compute-1.amazonaws.com \
+            "pm2 restart api || pm2 start /var/www/api_devops/server.js --name api"
