@@ -1,0 +1,28 @@
+{
+  "name": "ci-cd-githubactions",
+  "version": "1.0.0",
+  "description": "Prueba ci-cd-githubActions",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxilakde/ci-cd-githubActions.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/maxilakde/ci-cd-githubActions/issues"
+  },
+  "homepage": "https://github.com/maxilakde/ci-cd-githubActions#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "jest": "^30.3.0",
+    "supertest": "^7.2.2"
+  }
+}
