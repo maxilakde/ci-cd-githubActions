@@ -40,7 +40,8 @@ app.get("/administradores", (req, res) => {
             "apellido" : "Sued",
             "edad": "RIP"
         }
-    ]  });
+    ],
+total:5  });
 })
 
 
