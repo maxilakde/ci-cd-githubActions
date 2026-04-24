@@ -20,6 +20,9 @@ jobs:
       - name: Instalar dependencias
         run: npm install
 
+      - name: Ejecutar Linterns
+        run: npm run lint app.js  
+
       - name: Ejecutar pruebas
         run: npm test
 
