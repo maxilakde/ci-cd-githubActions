@@ -62,6 +62,6 @@ jobs:
           password: ${{secrets.MAIL_PASSWORD}}
           subject: "CI BUILD - ${{ github.ref }} - ${{ job.status }}"
           to: "maximiliano.astor@gmail.com"
-          from: "CI Pipeline < ${{secrets.MAIL_USERNAME}}
+          from: "CI Pipeline < ${{ secrets.MAIL_USERNAME }} >" 
           body: |
             HOLA! El Pipeline ha finalizado 
