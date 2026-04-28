@@ -64,4 +64,14 @@ jobs:
           to: "maximiliano.astor@gmail.com"
           from: "CI Pipeline < ${{ secrets.MAIL_USERNAME }} >" 
           body: |
-            HOLA! El Pipeline ha finalizado correctamente
+            body: |
+            Hola, 
+
+            El pipeline ha finalizado.           
+            Estado: ${{ job.status }} 
+            Commit: ${{ github.sha }}
+            Autor: ${{ github.actor }}
+            Rama: ${{ github.ref_name }}
+
+            Saludos,
+            CI/CD Pipeline
