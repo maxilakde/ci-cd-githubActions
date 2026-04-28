@@ -58,7 +58,7 @@ jobs:
         with:
           server_address: ${{ secrets.MAIL_SERVER }}
           server_port: 465
-          user_name: ${{secrets.MAIL_USERNAME}}
+          username: ${{secrets.MAIL_USERNAME}}
           password: ${{secrets.MAIL_PASSWORD}}
           subject: "CI BUILD - ${{ github.ref }} - ${{ job.status }}"
           to: "maximiliano.astor@gmail.com"
